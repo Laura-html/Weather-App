@@ -33,6 +33,13 @@ header {
   margin-left: 5px;
   font-size: 16px;
 }
+main {
+  padding: 30px 0;
+}
+.weather-app-data {
+  display: flex;
+  justify-content: space-between;
+}
 footer {
   border-top: 1px solid #f9f7fe;
   padding: 30px 0 0 0;
