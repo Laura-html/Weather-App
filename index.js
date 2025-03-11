@@ -54,31 +54,33 @@ function handleSearchSubmit(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
-function displayForcast(response) {
-  let forecastElement = document.querySelector("#forecast");
-  let days = ["Tues", "Wed", "Thurs", "Fri", "Sat"];
-  let forecastHtml = "";
-  days.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      `<div class="weather-forecast-day">
-            <div class="weather-forecast-date">${day}</div>
-            <div class="weather-forecast-icon">⛅</div>
-            <div class="weather-forecast-temperatures">
-              <div class="weather-forcast-temperature">
-                <strong>15°</strong>
-              </div>
-              <div class="weather-forecast-temperature">9°</div>
-            </div>
-          </div>`;
-  });
-  forecastElement.innerHTML = forecastHtml;
-}
-
 function getForecast(city) {
   let apiKey = "9245bb24b027319eb10oat71638b73cf";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  axios(apiUrl).then(displayForcast);
+  axios(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  let forecastHtml = "";
+
+  response.data.daily.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `<div class="weather-forecast-day">
+            <div class="weather-forecast-date">Tues</div>
+            <div class="weather-forecast-icon">⛅</div>
+            <div class="weather-forecast-temperatures">
+              <div class="weather-forcast-temperature">
+                <strong>${Math.round(day.temperature.maximum)}°</strong>
+              </div>
+              <div class="weather-forecast-temperature">${Math.round(
+                day.temperature.minimum
+              )}°</div>
+            </div>
+          </div>`;
+  });
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
 }
 
 searchCity("London");
