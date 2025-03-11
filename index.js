@@ -35,6 +35,7 @@ function refreshWeather(response) {
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   iconElement.innerHTML = `<img src"${response.data.condition.icon_url}" class = "weather-app-icon"/>`;
+  getForecast("response.data.city");
 }
 
 function searchCity(city) {
@@ -81,4 +82,3 @@ function getForecast(city) {
 }
 
 searchCity("London");
-getForecast("London");
